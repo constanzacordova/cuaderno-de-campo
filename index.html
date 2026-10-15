@@ -230,6 +230,7 @@ body:not(.home) #home-full{margin-top:8px}
 .sizes legend{font-family:var(--sans);font-size:.85rem;color:var(--pencil);margin-bottom:10px;padding:0}
 .size{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:baseline;padding:14px 2px;border-bottom:1px solid var(--rule);cursor:pointer}
 .size input{accent-color:var(--ink);transform:translateY(2px)}
+.size.out{opacity:.5;cursor:default}
 .size .nm{font-size:1.1rem}
 .size small{font-family:var(--sans);font-size:.8rem;color:var(--pencil);margin-left:8px}
 .size .price{font-family:var(--sans);font-variant-numeric:tabular-nums;font-size:.95rem}
@@ -510,39 +511,29 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   <audio id="e-audio" preload="metadata"></audio>
 </div>
 
-<script>
-const BOOKS = [
-  {n:1, roman:"I", title:"Cielos bajos", place:"Andes del sur del Perú", season:"Otoño", cls:"c1", peek:"img/cuaderno-1.jpg",
-   intro:"Una semana de tormentas que casi nunca terminaron de caer. Cerros a más de tres mil metros, y la luz que se colaba por debajo de las nubes."},
-  {n:2, roman:"II", title:"Humedales del sur", place:"Centro-sur de Chile", season:"Invierno", cls:"c2", peek:"img/cuaderno-2.jpg",
-   intro:"Madrugadas y atardeceres de invierno entre pastizales y árboles sin hojas. Todas las obras de este cuaderno se grabaron con su sonido."},
-  {n:3, roman:"—", title:"Apuntes sueltos", place:"Fuera de serie", season:"Varias estaciones", cls:"c3", peek:"img/cuaderno-3.jpg",
-   intro:"Fotografías que no pertenecen a una salida en particular. Ediciones aún más cortas."},
-];
-const WORKS = [
-  {id:"01", book:1, title:"Antes de la lluvia", img:"img/01-antes-de-la-lluvia.jpg", shape:"tall", alt:"Cerros verdes con rocas rojizas bajo un cielo de tormenta",
-   region:"Andes del sur del Perú", alt_m:"sobre 3.300 m", season:"Otoño", hour:"16:40",
-   note:"El cielo bajó en veinte minutos. Abajo, el cerro seguía verde, como si no se hubiera enterado.", audio:null},
-  {id:"02", book:1, title:"Tres minutos de luz", img:"img/02-tres-minutos-de-luz.jpg", shape:"tall", alt:"Un cerro encendido de rojo al atardecer sobre una ciudad de ladrillo",
-   region:"Ciudad andina", alt_m:"sobre 3.300 m", season:"Otoño", hour:"18:05",
-   note:"No llovió. El sol encontró una rendija bajo la nube y encendió el cerro por tres minutos. Después, nada.", audio:null},
-  {id:"03", book:2, title:"El vuelo", img:"img/03-el-vuelo.jpg", shape:"wide", alt:"Silueta de un ave en vuelo sobre un horizonte morado al atardecer",
-   region:"Humedal del centro-sur", alt_m:"nivel del mar", season:"Invierno", hour:"19:52",
-   note:"Estuvo quieta en el pasto hasta que oscureció. El sonido es el segundo exacto en que levantó el vuelo.",
-   audio:"audio/03-el-vuelo.mp3", recorded:"Grabado en el lugar, en el mismo momento"},
-  {id:"04", book:2, title:"Bandada", img:"img/04-bandada.jpg", shape:"wide", alt:"Una bandada de pájaros pequeños posados en las ramas desnudas de un árbol",
-   region:"Valle del centro-sur", alt_m:"bajo 500 m", season:"Invierno", hour:"08:10",
-   note:"Llegaron todos juntos al mismo árbol, con el frío de la mañana. Hablaban más fuerte que el viento.",
-   audio:"audio/04-bandada.mp3", recorded:"Grabado en el lugar, la misma mañana"},
-  {id:"05", book:3, title:"Bajo el puente", img:"img/05-bajo-el-puente.jpg", shape:"tall", alt:"Hileras de pilares de hormigón bajo un puente, reflejados en el agua de un río",
-   region:"Ribera de un río", alt_m:"bajo 200 m", season:"Primavera", hour:"10:30",
-   note:"Abajo del puente el ruido de los autos se apaga y solo queda el río pasando entre los pilares.", audio:null},
-];
-const SIZES = [
-  {k:"S", name:"30 × 40 cm", ed:25, left:18, price:190000},
-  {k:"M", name:"50 × 70 cm", ed:15, left:11, price:340000},
-  {k:"L", name:"70 × 100 cm", ed:7, left:6, price:590000},
-];
+<script type="module">
+// ===== catálogo: todo el contenido vive en content/catalogo.json =====
+const CAT = await fetch("content/catalogo.json", {cache: "no-cache"}).then(r => r.json());
+const BOOKS = CAT.cuadernos.map(c => ({n:c.numero, roman:c.romano, title:c.titulo, place:c.lugar, season:c.estacion, color:c.color, peek:c.portada, intro:c.texto_sala}));
+const WORKS = CAT.obras.filter(o => o.publicada !== false).map(o => ({id:o.id, book:o.cuaderno, title:o.titulo, img:o.foto, shape:o.formato === "horizontal" ? "wide" : "tall",
+  alt:o.descripcion_foto, region:o.region, alt_m:o.altitud, season:o.estacion, hour:o.hora, note:o.nota, audio:o.audio || null, recorded:o.sobre_el_sonido, sold:o.vendidos || {}}));
+const SIZES = CAT.tamanos.map(t => ({k:t.clave, name:t.medida, ed:t.tiraje, price:t.precio}));
+const leftOf = (w, s) => Math.max(0, s.ed - (w.sold[s.k] || 0));
+
+// ===== registro de visitas, eventos y reservas → Google Sheet (ver CLAUDE.md) =====
+const REG = (CAT.config && CAT.config.registro_url) || "";
+const ss = (k, v) => { try{ if(v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); }catch(_){ return null; } };
+const SID = ss("cdc-sid") || (() => { const id = Math.random().toString(36).slice(2, 10); ss("cdc-sid", id); return id; })();
+const ORIGEN = ss("cdc-origen") || (() => { const q = new URLSearchParams(location.search);
+  let o = q.get("utm_source") || q.get("ref") || (document.referrer && !document.referrer.includes(location.host) ? new URL(document.referrer).hostname : "directo");
+  if(q.get("utm_campaign")) o += " / " + q.get("utm_campaign"); ss("cdc-origen", o); return o; })();
+function log(tipo, datos = {}){
+  if(!REG) return;
+  const body = JSON.stringify({tipo, datos, pagina: location.hash || "#inicio", sesion: SID, origen: ORIGEN,
+    dispositivo: innerWidth < 760 ? "móvil" : "escritorio", fecha: new Date().toISOString()});
+  try{ if(navigator.sendBeacon && navigator.sendBeacon(REG, new Blob([body], {type: "text/plain"}))) return; }catch(_){}
+  fetch(REG, {method: "POST", mode: "no-cors", body}).catch(() => {});
+}
 const clp = n => "$" + n.toLocaleString("es-CL");
 const $ = id => document.getElementById(id);
 const bookOf = w => BOOKS.find(b => b.n === w.book);
@@ -574,10 +565,12 @@ function showDetail(w){
   drawBack(); drawScale(); goSlide(0, false);
   $("d-num").textContent = `Cuaderno ${b.roman} · ${b.title}`;
   $("d-title").textContent = w.title; $("d-note").textContent = w.note; $("d-log").innerHTML = facts(w);
-  $("d-sizes").innerHTML = '<legend>Tamaño y edición</legend>' + SIZES.map(s => `
-    <label class="size"><input type="radio" name="size" id="size-${s.k}" value="${s.k}" ${s.k===size.k?'checked':''}>
-      <span><span class="nm">${s.name}</span><small>edición de ${s.ed}, quedan ${s.left}</small></span><span class="price">${clp(s.price)}</span></label>`).join("");
-  $("d-sizes").querySelectorAll("input").forEach(i => i.addEventListener("change", () => { size = SIZES.find(s => s.k === i.value); drawScale(); updateCap(); }));
+  if(!leftOf(w, size)) size = SIZES.find(s => leftOf(w, s)) || size;
+  $("d-sizes").innerHTML = '<legend>Tamaño y edición</legend>' + SIZES.map(s => { const l = leftOf(w, s); return `
+    <label class="size${l ? "" : " out"}"><input type="radio" name="size" id="size-${s.k}" value="${s.k}" ${s.k===size.k && l ?'checked':''} ${l ? "" : "disabled"}>
+      <span><span class="nm">${s.name}</span><small>${l ? `edición de ${s.ed}, quedan ${l}` : `edición de ${s.ed}, agotada`}</small></span><span class="price">${l ? clp(s.price) : "Agotada"}</span></label>`; }).join("");
+  const anyLeft = SIZES.some(s => leftOf(w, s)); document.querySelector('#v-obra .buy').hidden = !anyLeft;
+  $("d-sizes").querySelectorAll("input").forEach(i => i.addEventListener("change", () => { size = SIZES.find(s => s.k === i.value); drawScale(); updateCap(); log("tamano", {obra: w.id, tamano: size.name}); }));
   $("d-listen").hidden = !w.audio; $("d-listen").href = "#escuchar-" + w.id;
 }
 // ===== detail carousel =====
@@ -647,7 +640,7 @@ function drawBack(){
 }
 
 function showCheckout(){
-  const w = current, s = size, n = s.ed - s.left + 1;
+  const w = current, s = size, n = s.ed - leftOf(w, s) + 1;
   $("c-back").href = "#obra-" + w.id; $("c-back").textContent = "Volver a " + w.title;
   $("s-title").textContent = w.title; $("s-ed").textContent = `Ejemplar ${n} de ${s.ed}`;
   $("s-size").textContent = s.name; $("s-price").textContent = clp(s.price); $("s-total").textContent = clp(s.price);
@@ -656,16 +649,21 @@ $("c-form").addEventListener("submit", e => {
   e.preventDefault();
   const ok = $("c-name").value.trim() && /\S+@\S+\.\S+/.test($("c-mail").value);
   $("c-err").hidden = !!ok; if(!ok) return;
-  const n = size.ed - size.left + 1;
+  const n = size.ed - leftOf(current, size) + 1;
   $("t-code").textContent = `Reserva CDC-${current.id}-${String(n).padStart(2,"0")}`;
-  $("t-text").textContent = `${current.title}, ${size.name}, ejemplar ${n} de ${size.ed}. Te escribimos a ${$("c-mail").value} con el link de pago. (Prototipo: no se envía ningún correo.)`;
+  $("t-text").textContent = `${current.title}, ${size.name}, ejemplar ${n} de ${size.ed}. Te escribiremos a ${$("c-mail").value} con el link de pago dentro de las próximas 24 horas.`;
   $("t-listen").href = "#escuchar-" + (current.audio ? current : WORKS.find(w => w.audio)).id;
+  log("reserva", {obra: current.id, titulo: current.title, tamano: size.name, precio: size.price, ejemplar: n,
+    nombre: $("c-name").value.trim(), correo: $("c-mail").value.trim(), telefono: $("c-phone").value.trim(),
+    region: $("c-region").value, direccion: $("c-addr").value.trim(), dedicatoria: $("c-msg").value.trim()});
   location.hash = "gracias";
 });
 
 // experience
 const audio = $("e-audio"); let ctx, analyser, data, raf;
+let expWork = null;
 function openExp(w){
+  expWork = w;
   const b = bookOf(w);
   $("e-bg").style.backgroundImage = `url(${w.img})`;
   $("e-ed").textContent = `Cuaderno ${b.roman} · ${b.title} · Ejemplar 7 de 25`;
@@ -684,7 +682,7 @@ $("e-play").addEventListener("click", async () => {
   }catch(_){}
   if(audio.paused){ try{ await audio.play(); }catch(_){} } else audio.pause();
 });
-audio.addEventListener("play", () => { setIcon(true); $("exp").classList.add("playing"); loop(); });
+audio.addEventListener("play", () => { log("escucha", {obra: expWork && expWork.id}); setIcon(true); $("exp").classList.add("playing"); loop(); });
 audio.addEventListener("pause", () => { setIcon(false); $("exp").classList.remove("playing"); });
 audio.addEventListener("loadedmetadata", () => $("e-dur").textContent = fmt(audio.duration));
 audio.addEventListener("timeupdate", () => $("e-cur").textContent = fmt(audio.currentTime));
@@ -708,7 +706,7 @@ $("simulate").addEventListener("click", () => {
 
 // ===== gallery walk: every cuaderno is a room =====
 const track = $("track"), walk = $("walk");
-const TINT = {1:"var(--cover-1)", 2:"var(--cover-2)", 3:"var(--cover-3)"};
+const TINT = Object.fromEntries(BOOKS.map(b => [b.n, b.color]));
 let walkMode = null;
 function roomPanel(b, mode){
   const count = WORKS.filter(w => w.book === b.n).length;
@@ -792,7 +790,7 @@ addEventListener("load", sizeWalk);
 // film sound
 $("film-sound").addEventListener("click", () => {
   const v = $("film-v"), on = v.muted;
-  v.muted = !on; if(on) v.play().catch(()=>{});
+  v.muted = !on; if(on){ v.play().catch(()=>{}); log("escucha_portada"); }
   $("film-sound").classList.toggle("on", on); $("film-sound").setAttribute("aria-pressed", on);
   $("film-sound-t").textContent = on ? "Silenciar" : "Escuchar el humedal";
   $("snd-wave").setAttribute("opacity", on ? "1" : ".35");
@@ -811,7 +809,7 @@ if(matchMedia("(pointer: fine)").matches && !reduce){
 let expReturn = "inicio", lastPage = "inicio";
 function route(){
   const h = (location.hash || "#inicio").slice(1); let m;
-  if((m = h.match(/^escuchar-(\d\d)$/))){ const w = WORKS.find(x => x.id === m[1] && x.audio); if(w){ expReturn = lastPage; openExp(w); return; } }
+  if((m = h.match(/^escuchar-(\d\d)$/))){ const w = WORKS.find(x => x.id === m[1] && x.audio); if(w){ expReturn = lastPage; openExp(w); log("vista", {vista: "nfc", obra: w.id}); return; } }
   if(!$("exp").hidden) closeExp();
   let v = "inicio", anchor = null;
   let book = null;
@@ -828,8 +826,10 @@ function route(){
   if(showWalk){ renderWalk(v === "inicio" ? "home" : "book", book); sizeWalk(); }
   if(v === "inicio") $("film-v").play().catch(()=>{}); else $("film-v").pause();
   lastPage = h;
+  log("vista", {vista: v, obra: v === "obra" ? current.id : undefined, cuaderno: book ? book.n : undefined});
   if(anchor) requestAnimationFrame(() => $(anchor).scrollIntoView({behavior:"smooth"})); else window.scrollTo(0,0);
 }
+document.querySelectorAll(".faq details").forEach(d => d.addEventListener("toggle", () => { if(d.open) log("pregunta", {texto: d.querySelector("summary").textContent}); }));
 window.addEventListener("hashchange", route); route();
 document.addEventListener("keydown", e => { if(e.key === "Escape" && !$("exp").hidden) location.hash = expReturn; });
 </script>

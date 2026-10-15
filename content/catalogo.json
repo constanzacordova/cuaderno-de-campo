@@ -1,0 +1,165 @@
+{
+  "_ayuda": "Catálogo del sitio. Lo edita Claude (o una persona) siguiendo CLAUDE.md. El sitio se arma solo a partir de este archivo.",
+  "config": {
+    "registro_url": ""
+  },
+  "tamanos": [
+    {
+      "clave": "S",
+      "medida": "30 × 40 cm",
+      "tiraje": 25,
+      "precio": 190000
+    },
+    {
+      "clave": "M",
+      "medida": "50 × 70 cm",
+      "tiraje": 15,
+      "precio": 340000
+    },
+    {
+      "clave": "L",
+      "medida": "70 × 100 cm",
+      "tiraje": 7,
+      "precio": 590000
+    }
+  ],
+  "cuadernos": [
+    {
+      "numero": 1,
+      "romano": "I",
+      "titulo": "Cielos bajos",
+      "lugar": "Andes del sur del Perú",
+      "estacion": "Otoño",
+      "color": "#4A5560",
+      "portada": "img/cuaderno-1.jpg",
+      "texto_sala": "Una semana de tormentas que casi nunca terminaron de caer. Cerros a más de tres mil metros, y la luz que se colaba por debajo de las nubes."
+    },
+    {
+      "numero": 2,
+      "romano": "II",
+      "titulo": "Humedales del sur",
+      "lugar": "Centro-sur de Chile",
+      "estacion": "Invierno",
+      "color": "#4B5E45",
+      "portada": "img/cuaderno-2.jpg",
+      "texto_sala": "Madrugadas y atardeceres de invierno entre pastizales y árboles sin hojas. Todas las obras de este cuaderno se grabaron con su sonido."
+    },
+    {
+      "numero": 3,
+      "romano": "—",
+      "titulo": "Apuntes sueltos",
+      "lugar": "Fuera de serie",
+      "estacion": "Varias estaciones",
+      "color": "#A48A5C",
+      "portada": "img/cuaderno-3.jpg",
+      "texto_sala": "Fotografías que no pertenecen a una salida en particular. Ediciones aún más cortas."
+    }
+  ],
+  "obras": [
+    {
+      "id": "01",
+      "cuaderno": 1,
+      "titulo": "Antes de la lluvia",
+      "foto": "img/01-antes-de-la-lluvia.jpg",
+      "formato": "vertical",
+      "descripcion_foto": "Cerros verdes con rocas rojizas bajo un cielo de tormenta",
+      "region": "Andes del sur del Perú",
+      "altitud": "sobre 3.300 m",
+      "estacion": "Otoño",
+      "hora": "16:40",
+      "nota": "El cielo bajó en veinte minutos. Abajo, el cerro seguía verde, como si no se hubiera enterado.",
+      "audio": null,
+      "sobre_el_sonido": null,
+      "publicada": true,
+      "vendidos": {
+        "S": 7,
+        "M": 4,
+        "L": 1
+      }
+    },
+    {
+      "id": "02",
+      "cuaderno": 1,
+      "titulo": "Tres minutos de luz",
+      "foto": "img/02-tres-minutos-de-luz.jpg",
+      "formato": "vertical",
+      "descripcion_foto": "Un cerro encendido de rojo al atardecer sobre una ciudad de ladrillo",
+      "region": "Ciudad andina",
+      "altitud": "sobre 3.300 m",
+      "estacion": "Otoño",
+      "hora": "18:05",
+      "nota": "No llovió. El sol encontró una rendija bajo la nube y encendió el cerro por tres minutos. Después, nada.",
+      "audio": null,
+      "sobre_el_sonido": null,
+      "publicada": true,
+      "vendidos": {
+        "S": 7,
+        "M": 4,
+        "L": 1
+      }
+    },
+    {
+      "id": "03",
+      "cuaderno": 2,
+      "titulo": "El vuelo",
+      "foto": "img/03-el-vuelo.jpg",
+      "formato": "horizontal",
+      "descripcion_foto": "Silueta de un ave en vuelo sobre un horizonte morado al atardecer",
+      "region": "Humedal del centro-sur",
+      "altitud": "nivel del mar",
+      "estacion": "Invierno",
+      "hora": "19:52",
+      "nota": "Estuvo quieta en el pasto hasta que oscureció. El sonido es el segundo exacto en que levantó el vuelo.",
+      "audio": "audio/03-el-vuelo.mp3",
+      "sobre_el_sonido": "Grabado en el lugar, en el mismo momento",
+      "publicada": true,
+      "vendidos": {
+        "S": 7,
+        "M": 4,
+        "L": 1
+      }
+    },
+    {
+      "id": "04",
+      "cuaderno": 2,
+      "titulo": "Bandada",
+      "foto": "img/04-bandada.jpg",
+      "formato": "horizontal",
+      "descripcion_foto": "Una bandada de pájaros pequeños posados en las ramas desnudas de un árbol",
+      "region": "Valle del centro-sur",
+      "altitud": "bajo 500 m",
+      "estacion": "Invierno",
+      "hora": "08:10",
+      "nota": "Llegaron todos juntos al mismo árbol, con el frío de la mañana. Hablaban más fuerte que el viento.",
+      "audio": "audio/04-bandada.mp3",
+      "sobre_el_sonido": "Grabado en el lugar, la misma mañana",
+      "publicada": true,
+      "vendidos": {
+        "S": 7,
+        "M": 4,
+        "L": 1
+      }
+    },
+    {
+      "id": "05",
+      "cuaderno": 3,
+      "titulo": "Bajo el puente",
+      "foto": "img/05-bajo-el-puente.jpg",
+      "formato": "vertical",
+      "descripcion_foto": "Hileras de pilares de hormigón bajo un puente, reflejados en el agua de un río",
+      "region": "Ribera de un río",
+      "altitud": "bajo 200 m",
+      "estacion": "Primavera",
+      "hora": "10:30",
+      "nota": "Abajo del puente el ruido de los autos se apaga y solo queda el río pasando entre los pilares.",
+      "audio": null,
+      "sobre_el_sonido": null,
+      "publicada": true,
+      "vendidos": {
+        "S": 7,
+        "M": 4,
+        "L": 1
+      }
+    }
+  ]
+}
