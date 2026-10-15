@@ -1,0 +1,838 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="description" content="Fotografía de naturaleza en ediciones limitadas, enmarcada a mano, con el sonido del lugar donde fue tomada.">
+<meta property="og:title" content="Cuaderno de Campo">
+<meta property="og:description" content="Paisajes que se pueden volver a escuchar.">
+<meta property="og:image" content="img/cuaderno-1.jpg">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Cuaderno de Campo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+/* Layout: the site is a stack of field notebooks. Home = an open notebook spread (text page + a print tipped in with photo corners),
+   collections = cloth-bound notebook covers, each collection opens into pages where prints sit with a handwritten-style caption beside them.
+   Faint dot grid on the paper, like a surveyor's notebook. */
+:root{
+  --paper:#EFEFEA; --paper-deep:#E4E5DE; --dot:rgba(40,48,44,.13);
+  --ink:#202522; --pencil:#646B66; --rule:#CDD1CA; --mat:#FAFAF7; --frame:#1B1D1C;
+  --cover-1:#4A5560; --cover-2:#4B5E45; --cover-3:#A48A5C; --cover-ink:#F1EFE8;
+  --night:#0E1110; --night-fg:#E8EBE6; --night-soft:#8F9891;
+  --serif:"Newsreader","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --sans:"Hanken Grotesk","Helvetica Neue",Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#171A18;--paper-deep:#1E2220;--dot:rgba(230,235,228,.08);--ink:#E7E9E3;--pencil:#9AA29C;--rule:#30362F;--mat:#EDEDE8;--frame:#060707;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#171A18;--paper-deep:#1E2220;--dot:rgba(230,235,228,.08);--ink:#E7E9E3;--pencil:#9AA29C;--rule:#30362F;--mat:#EDEDE8;--frame:#060707;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background-color:var(--paper);  color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.55;font-optical-sizing:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.22em}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto}
+h1,h2,h3{font-family:var(--serif);font-weight:300;text-wrap:balance;margin:0;line-height:1.02;letter-spacing:-.01em}
+.small{font-family:var(--sans);font-size:.78rem;letter-spacing:.02em;color:var(--pencil)}
+.link{font-family:var(--sans);font-size:.92rem;font-weight:500;text-decoration:underline;background:none;border:0;padding:0;color:var(--ink);cursor:pointer}
+.link.arrow::after{content:" →"}
+.buy{font-family:var(--sans);font-size:.95rem;font-weight:500;background:var(--ink);color:var(--paper);border:0;padding:.95em 1.5em;cursor:pointer;text-decoration:none;display:inline-block;border-radius:2px}
+.buy:hover{opacity:.9}
+
+/* header */
+header.top .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-block:22px 10px;flex-wrap:wrap}
+.brand{font-family:var(--serif);font-style:italic;font-size:1.5rem;text-decoration:none;font-weight:400}
+nav.links{display:flex;gap:24px;font-family:var(--sans);font-size:.9rem}
+nav.links a{text-decoration:none;color:var(--pencil)}
+nav.links a:hover{color:var(--ink);text-decoration:underline}
+
+/* ===== Home: hero film + gallery walk ===== */
+:root{--wall:#E3E2DC;--wall-hi:#F3F2EE;--label:#FBFBF8;--label-ink:#202522;--film-fg:#F1EFE8}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--tint-op:.2;--wall:#161817;--wall-hi:#2B2E2C;--label:#232624;--label-ink:#E7E9E3}}
+:root[data-theme="dark"]{--tint-op:.2;--wall:#161817;--wall-hi:#2B2E2C;--label:#232624;--label-ink:#E7E9E3}
+body{overflow-x:clip}
+.bleed{margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)))}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body.home header.top{position:absolute;left:0;right:0;top:env(safe-area-inset-top,0px);z-index:6;color:var(--film-fg)}
+body.home header.top .wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body.home nav.links a{color:rgba(241,239,232,.75)} body.home nav.links a:hover{color:var(--film-fg)}
+.film{position:relative;height:min(92svh,900px);min-height:520px;overflow:hidden;background:#0B0C10;color:var(--film-fg)}
+.film video{position:absolute;inset:-4% 0 0 0;width:100%;height:108%;object-fit:cover;will-change:transform}
+.film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,9,12,.45) 0%,rgba(8,9,12,0) 30%,rgba(8,9,12,0) 50%,rgba(8,9,12,.75) 100%)}
+.film .over{position:absolute;left:0;right:0;bottom:0;z-index:2;padding-block:0 clamp(28px,6vh,64px)}
+.film .over .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:end}
+.film h1{font-size:clamp(2.8rem,8vw,7rem);font-style:italic;font-weight:300;max-width:11em;will-change:transform,opacity}
+.film .sub{font-family:var(--sans);font-size:.95rem;color:rgba(241,239,232,.78);margin:18px 0 0;max-width:36em}
+.listen{display:flex;align-items:center;gap:14px;background:none;border:0;color:var(--film-fg);font-family:var(--sans);font-size:.9rem;cursor:pointer;padding:0}
+.listen .ring{width:58px;height:58px;border-radius:50%;border:1px solid rgba(241,239,232,.7);display:grid;place-items:center;position:relative}
+.listen .ring svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5}
+.listen.on .ring::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--film-fg);animation:ring2 2s ease-out infinite}
+@keyframes ring2{from{transform:scale(1);opacity:.8}to{transform:scale(1.7);opacity:0}}
+.film .cue{position:absolute;z-index:2;left:50%;bottom:14px;transform:translateX(-50%);font-family:var(--sans);font-size:.72rem;letter-spacing:.06em;color:rgba(241,239,232,.6)}
+
+.walk{position:relative;background:radial-gradient(ellipse 70% 60% at 50% 18%,var(--wall-hi),var(--wall) 70%)}
+.walk::before{content:"";position:absolute;inset:0;background-color:var(--tint,transparent);opacity:var(--tint-op,.11);transition:background-color 1.4s ease;pointer-events:none}
+.walk .stage{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center}
+.room{flex:none;width:min(330px,72vw);border-left:1px solid var(--ink);padding-left:24px;display:flex;flex-direction:column;gap:6px}
+.room .roman{font-size:clamp(4rem,8vw,6.5rem);font-weight:300;line-height:.85;margin:10px 0 8px}
+.room h3{font-size:clamp(1.9rem,3vw,2.6rem);font-style:italic}
+.room p{color:var(--pencil);margin:10px 0 0;font-size:1rem}
+.room .link{margin-top:14px;align-self:flex-start}
+.room.end{border-left-style:dashed}
+.wall-label.long{width:250px}
+.wall-label .nt{display:block;font-family:var(--serif);font-style:italic;font-size:.98rem;line-height:1.45;margin:2px 0 10px}
+.wall-label .go{display:inline-block;margin-top:10px;text-decoration:underline;font-weight:500}
+body:not(.home) #home-full{margin-top:8px}
+.walk .meter a{color:var(--ink)}
+.walk .track{display:flex;align-items:center;gap:clamp(80px,12vw,200px);padding-inline:8vw 14vw;will-change:transform}
+.walk .intro{flex:none;width:min(380px,70vw)}
+.walk .intro h2{font-size:clamp(2.2rem,4vw,3.4rem);font-style:italic}
+.walk .intro p{color:var(--pencil);margin:14px 0 0}
+.walk .intro .small{display:block;margin-top:24px}
+.piece{flex:none;display:flex;align-items:flex-end;gap:28px;text-decoration:none;color:inherit;position:relative}
+.piece::before{content:"";position:absolute;left:-12%;right:30%;top:-24%;height:70%;background:radial-gradient(ellipse at 50% 0%,rgba(255,250,235,.22),transparent 70%);pointer-events:none;transition:opacity .5s}
+.piece .print{transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s;box-shadow:0 30px 40px -28px rgba(0,0,0,.65),0 2px 4px rgba(0,0,0,.12)}
+.piece .print .mat{padding:clamp(22px,4.5svh,46px)}
+.piece.tall .print img{height:min(52svh,520px);width:auto}
+.piece.wide .print img{width:min(46vw,700px);height:auto}
+.piece:hover .print{transform:translateY(-8px) scale(1.012);box-shadow:0 44px 50px -30px rgba(0,0,0,.7),0 2px 4px rgba(0,0,0,.12)}
+.wall-label{width:190px;background:var(--label);color:var(--label-ink);padding:14px 16px;font-family:var(--sans);font-size:.78rem;line-height:1.5;box-shadow:0 1px 2px rgba(0,0,0,.12);margin-bottom:6%}
+.wall-label b{display:block;font-family:var(--serif);font-style:italic;font-weight:400;font-size:1.15rem;margin-bottom:6px}
+.wall-label .mute{opacity:.65}
+.wall-label .snd{display:inline-flex;gap:6px;align-items:center;margin-top:8px}
+.wall-label .snd::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.walk .meter{position:absolute;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:max(22px,env(safe-area-inset-bottom,0px));display:flex;gap:16px;align-items:center;font-family:var(--sans);font-size:.78rem;color:var(--pencil);font-variant-numeric:tabular-nums}
+.walk .meter .bar{flex:1;height:1px;background:var(--rule);position:relative}
+.walk .meter .bar i{position:absolute;left:0;top:-1px;height:3px;background:var(--ink);width:0}
+.walk.native .stage{position:relative;height:auto;padding-block:72px 90px}
+.walk.native .track{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-inline:16px;gap:48px;width:100%;scrollbar-width:none}
+.walk.native .piece,.walk.native .intro,.walk.native .room{scroll-snap-align:center}
+.walk.native .piece{flex-direction:column;align-items:flex-start;gap:16px}
+.walk.native .piece.tall .print img{height:52svh}
+.walk.native .piece.wide .print img{width:82vw}
+.walk.native .wall-label{margin:0}
+.cursor{position:fixed;left:0;top:0;z-index:40;pointer-events:none;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--ink);transition:width .25s,height .25s,margin .25s,background .25s;display:grid;place-items:center;font-family:var(--sans);font-size:.8rem;color:var(--paper)}
+.cursor span{opacity:0;transition:opacity .2s}
+.cursor[hidden]{display:none}
+.cursor.big{width:76px;height:76px;margin:-38px 0 0 -38px}
+.cursor.big span{opacity:1}
+.cursor.light{background:var(--film-fg);color:#111}
+
+/* framed print */
+.print{background:var(--frame);padding:5px;box-shadow:0 22px 36px -22px rgba(0,0,0,.5)}
+.print .mat{background:var(--mat);padding:9%}
+.print img{display:block;width:100%;height:auto}
+
+/* notebooks shelf */
+.section{padding-block:80px 0}
+.section h2{font-size:clamp(2rem,4vw,3.2rem)}
+.section .intro{max-width:34em;color:var(--pencil);margin:12px 0 36px}
+.shelf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.book{display:grid;gap:18px;text-decoration:none;color:inherit}
+.book .img{aspect-ratio:4/5;overflow:hidden;background:var(--paper-deep)}
+.book .img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.4s cubic-bezier(.2,.7,.2,1),filter .6s;filter:saturate(.9)}
+.book:hover .img img{transform:scale(1.045);filter:saturate(1)}
+.book .cap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:baseline;border-top:1px solid var(--ink);padding-top:12px}
+.book .roman{font-size:2.6rem;font-weight:300;line-height:.9;min-width:1.2em}
+.book h3{font-size:1.6rem;font-style:italic;margin-bottom:4px}
+.book .small{display:block}
+.book:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.15em}
+
+/* sound band */
+.sound{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:56px;align-items:center}
+.sound p{max-width:32em}
+.sound .steps{margin:22px 0 28px;padding:0;list-style:none;display:grid;gap:14px}
+.sound .steps li{padding-left:22px;position:relative}
+.sound .steps li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:1px;background:var(--ink)}
+.phone{width:260px;max-width:100%;aspect-ratio:9/18;margin:0 auto;border:10px solid var(--frame);border-radius:34px;background:var(--night);position:relative;overflow:hidden;color:var(--night-fg)}
+.phone .ph-img{position:absolute;inset:0;background:url(img/03-el-vuelo.jpg) center/cover;opacity:.55}
+.phone .ph-ui{position:absolute;inset:auto 0 0 0;padding:20px;display:grid;gap:6px;background:linear-gradient(transparent,rgba(0,0,0,.85))}
+.phone .ph-title{font-size:1.7rem;font-style:italic;font-weight:300}
+.phone .ph-s{font-family:var(--sans);font-size:.72rem;color:var(--night-soft)}
+.phone .pulse{position:absolute;top:28%;left:50%;width:70px;height:70px;margin-left:-35px;border:1px solid var(--night-fg);border-radius:50%;opacity:0}
+.phone.tap .pulse{animation:ring 1.4s ease-out 2}
+@keyframes ring{from{transform:scale(.4);opacity:.9}to{transform:scale(2.2);opacity:0}}
+
+.creed{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;border-top:1px solid var(--ink);padding-top:28px}
+.creed h3{font-size:1.5rem;font-style:italic;margin-bottom:8px}
+.creed p{margin:0;color:var(--pencil);font-size:1rem}
+
+/* notebook (collection) view */
+.nb-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:end;padding-block:36px 8px;border-bottom:1px solid var(--rule)}
+.nb-head .roman{font-size:clamp(4rem,10vw,7.5rem);font-weight:300;line-height:.8}
+.nb-head h1{font-size:clamp(2.2rem,5vw,3.8rem);font-style:italic}
+.nb-head p{margin:10px 0 0;color:var(--pencil);max-width:36em}
+.entries{display:grid;gap:96px;padding-top:64px}
+.entry{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:56px;align-items:end;text-decoration:none}
+.entry:nth-child(even){grid-template-columns:minmax(0,4fr) minmax(0,7fr)}
+.entry:nth-child(even) .pic{order:2}
+.entry .pic{display:flex;justify-content:center}
+.entry.tall .pic .print{width:min(100%,430px)}
+.entry.wide .pic .print{width:100%}
+.entry .cap .n{font-family:var(--sans);font-size:.8rem;color:var(--pencil)}
+.entry h2{font-size:clamp(2rem,3.6vw,2.9rem);margin:6px 0 14px}
+.entry .cap p{font-style:italic;margin:0 0 18px;color:var(--pencil)}
+.entry .facts{font-family:var(--sans);font-size:.85rem;color:var(--pencil);margin:0 0 20px}
+.entry:hover h2{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.15em}
+.nb-nav{display:flex;justify-content:space-between;gap:16px;margin-top:96px;padding-top:22px;border-top:1px solid var(--rule);font-family:var(--sans)}
+
+/* detail */
+.crumbs{font-family:var(--sans);font-size:.85rem;color:var(--pencil);padding-block:30px 6px}
+.crumbs a{color:var(--pencil)}
+.detail{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:start}
+/* detail carousel */
+.slides{display:grid;grid-auto-flow:column;grid-auto-columns:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;background:var(--paper-deep);border:1px solid var(--rule)}
+.slides::-webkit-scrollbar{display:none}
+.slide{margin:0;scroll-snap-align:start;min-height:clamp(380px,64vh,680px);padding:clamp(24px,6vw,72px);display:grid;place-items:center;position:relative;overflow:hidden}
+.slide .print{width:100%;transition:max-width .4s}
+.slide.dz{padding:0;cursor:zoom-in}
+.zoom{position:absolute;inset:0;background-repeat:no-repeat;background-size:280%;background-position:50% 55%;transition:background-position .25s ease-out}
+.zoom::after{content:"";position:absolute;inset:0;mix-blend-mode:multiply;opacity:.35;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55  0 0 0 0 .53  0 0 0 0 .5  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.slide svg{width:100%;height:auto;max-height:100%;overflow:visible}
+.sv-l{stroke:var(--ink);fill:none;stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round}
+.sv-p{stroke:var(--pencil);fill:none;stroke-width:.7}
+.sv-f{fill:var(--mat);stroke:var(--ink);stroke-width:1.4}
+.sv-k{fill:var(--paper);stroke:var(--ink);stroke-width:1.2}
+.sv-d{fill:var(--ink)}
+.sv-t{fill:var(--ink);font-family:var(--serif);font-style:italic;font-size:11px}
+.sv-s{fill:var(--pencil);font-family:var(--sans);font-size:8.5px}
+.slide-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;font-family:var(--sans)}
+.slide-tabs{display:flex;gap:18px;flex-wrap:wrap}
+.slide-tabs button{background:none;border:0;padding:4px 0;font:inherit;font-size:.86rem;color:var(--pencil);cursor:pointer;border-bottom:1px solid transparent}
+.slide-tabs button[aria-current="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.arrows{display:flex;gap:6px}
+.arrows button{width:38px;height:38px;border-radius:50%;border:1px solid var(--rule);background:transparent;color:var(--ink);cursor:pointer;font-size:1rem}
+.arrows button:hover{border-color:var(--ink)}
+.slide-cap{font-style:italic;color:var(--pencil);margin:10px 0 0;font-size:1rem;min-height:1.6em}
+
+/* faq */
+.faq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:56px;align-items:start}
+.faq h2{position:sticky;top:24px}
+.faq .lead{color:var(--pencil);margin:12px 0 0;max-width:20em}
+.faq details{border-top:1px solid var(--rule)}
+.faq details:last-child{border-bottom:1px solid var(--rule)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:18px 0;font-size:1.2rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--sans);font-weight:400;color:var(--pencil);transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{margin:0 0 20px;color:var(--pencil);max-width:38em;font-size:1rem}
+@media (max-width:860px){.faq{grid-template-columns:minmax(0,1fr);gap:20px}.faq h2{position:static}}
+.detail h1{font-size:clamp(2.4rem,4.8vw,3.8rem);font-style:italic;margin:6px 0 16px}
+.detail .note{font-style:italic;font-size:1.15rem;margin:0 0 26px}
+.facts-table{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 20px;margin:0 0 28px;font-family:var(--sans);font-size:.9rem}
+.facts-table dt{color:var(--pencil)}.facts-table dd{margin:0}
+.sizes{display:grid;gap:0;margin:0 0 26px;border:0;padding:0;border-top:1px solid var(--rule)}
+.sizes legend{font-family:var(--sans);font-size:.85rem;color:var(--pencil);margin-bottom:10px;padding:0}
+.size{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:baseline;padding:14px 2px;border-bottom:1px solid var(--rule);cursor:pointer}
+.size input{accent-color:var(--ink);transform:translateY(2px)}
+.size .nm{font-size:1.1rem}
+.size small{font-family:var(--sans);font-size:.8rem;color:var(--pencil);margin-left:8px}
+.size .price{font-family:var(--sans);font-variant-numeric:tabular-nums;font-size:.95rem}
+.actions{display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.includes{font-family:var(--sans);font-size:.88rem;color:var(--pencil);margin:28px 0 0;line-height:1.7}
+
+/* checkout */
+.checkout{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:64px;padding-top:10px}
+.checkout h1{font-size:clamp(2.2rem,4.5vw,3.4rem);font-style:italic;margin:4px 0 12px}
+form.f{display:grid;gap:18px;font-family:var(--sans)}
+.f .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.f label{display:grid;gap:6px;font-size:.85rem;color:var(--pencil)}
+.f input,.f select,.f textarea{font:inherit;font-size:1rem;color:var(--ink);padding:.55em 0;background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;width:100%}
+.f select option{color:#202522}
+.receipt{background:var(--mat);color:#202522;padding:26px;display:grid;gap:14px;align-content:start;box-shadow:0 18px 30px -24px rgba(0,0,0,.5);font-family:var(--sans);font-size:.92rem}
+.receipt .t{font-family:var(--serif);font-style:italic;font-size:1.5rem}
+.receipt .ln{display:flex;justify-content:space-between;gap:12px;font-variant-numeric:tabular-nums}
+.receipt .tot{border-top:1px dashed #AEB3AC;padding-top:12px;font-weight:600}
+.receipt .muted{color:#646B66}
+
+/* thanks */
+.thanks{max-width:720px;padding-top:60px}
+.thanks h1{font-size:clamp(2.4rem,5vw,3.8rem);font-style:italic;margin:6px 0 16px}
+.journey{margin:36px 0;padding:0;list-style:none;display:grid;gap:22px;border-left:1px solid var(--ink);padding-left:24px}
+.journey li{position:relative}
+.journey li::before{content:"";position:absolute;left:-29px;top:.55em;width:9px;height:9px;border-radius:50%;background:var(--paper);border:1px solid var(--ink)}
+.journey li:first-child::before{background:var(--ink)}
+.journey b{font-weight:500;display:block}
+.journey span{color:var(--pencil);font-size:1rem}
+
+footer{margin-top:110px;border-top:1px solid var(--rule)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:26px 40px}
+
+/* ===== Experience (NFC destination): one deliberate night look ===== */
+.exp{position:fixed;inset:0;z-index:20;background:var(--night);color:var(--night-fg);overflow-y:auto;
+  padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(16px,env(safe-area-inset-left,0px))}
+.exp .bg{position:fixed;inset:0;background-size:cover;background-position:center;opacity:.3;transition:opacity 1.2s ease}
+.exp.playing .bg{opacity:.5}
+.exp .inner{position:relative;max-width:560px;margin:0 auto;min-height:100%;display:grid;grid-template-rows:auto 1fr auto;gap:24px;padding-block:22px 28px}
+.exp .tophead{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.exp .center{display:grid;align-content:center;gap:16px}
+.exp .ed{font-family:var(--sans);font-size:.8rem;color:var(--night-soft)}
+.exp h1{font-size:clamp(2.8rem,10vw,4rem);font-style:italic}
+.playbtn{width:92px;height:92px;border-radius:50%;border:1px solid var(--night-fg);background:transparent;color:var(--night-fg);display:grid;place-items:center;margin:8px 0;cursor:pointer}
+.playbtn:hover{background:rgba(255,255,255,.06)}
+.playbtn svg{width:28px;height:28px;fill:currentColor}
+.exp .hint{font-family:var(--sans);font-size:.82rem;color:var(--night-soft)}
+.exp canvas{width:100%;height:64px;display:block}
+.exp .timebar{display:flex;justify-content:space-between;font-family:var(--sans);font-size:.78rem;color:var(--night-soft);font-variant-numeric:tabular-nums}
+.exp .story{font-style:italic;font-size:1.15rem;line-height:1.6;margin:6px 0 0}
+.exp .facts-table{color:var(--night-fg)} .exp .facts-table dt{color:var(--night-soft)}
+.exp .care{font-family:var(--sans);font-size:.8rem;color:var(--night-soft);border-top:1px solid rgba(255,255,255,.14);padding-top:14px;margin:0}
+.exp .close{background:transparent;border:0;color:var(--night-fg);font-family:var(--sans);font-size:.9rem;text-decoration:underline;cursor:pointer}
+
+@media (max-width:860px){
+  body{font-size:17px}
+  .sound,.detail,.checkout,.entry,.entry:nth-child(even){grid-template-columns:minmax(0,1fr)}
+  .film .over .wrap{grid-template-columns:minmax(0,1fr)}
+  .entry:nth-child(even) .pic{order:0}
+  .entry{gap:24px}
+  .shelf{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .creed{grid-template-columns:minmax(0,1fr);gap:24px}
+  .detail,.checkout{gap:32px}
+  .sound .phone{order:-1}
+}
+@media (max-width:480px){.f .two{grid-template-columns:minmax(0,1fr)}.shelf{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#inicio">Cuaderno de Campo</a>
+  <nav class="links" aria-label="Principal">
+    <a href="#cuadernos">Cuadernos</a>
+    <a href="#sonido">La obra suena</a>
+    <a href="#preguntas">Preguntas</a>
+  </nav>
+</div></header>
+
+<!-- HOME: full-bleed film + gallery walk -->
+<div id="home-full" class="bleed">
+  <section class="film" id="film">
+    <video id="film-v" src="video/humedal.mp4" poster="video/humedal-poster.jpg" autoplay muted loop playsinline preload="auto"></video>
+    <div class="over"><div class="wrap gut">
+      <div>
+        <h1 id="film-h">Paisajes que se pueden volver a escuchar.</h1>
+        <p class="sub">Fotografía de naturaleza impresa en papel de algodón, enmarcada a mano y en ediciones cortas. Cada obra guarda el sonido del lugar donde fue tomada.</p>
+      </div>
+      <button class="listen" id="film-sound" type="button" aria-pressed="false">
+        <span class="ring"><svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z"/><path id="snd-wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" opacity=".35"/></svg></span>
+        <span id="film-sound-t">Escuchar el humedal</span>
+      </button>
+    </div></div>
+    <span class="cue">Baja para recorrer la galería</span>
+  </section>
+
+  <section class="walk" id="walk" aria-label="Sala: obras en exhibición">
+    <div class="stage">
+      <div class="track" id="track">
+        <div class="intro">
+          <h2>En sala</h2>
+          <p>Cinco obras de los primeros cuadernos. Recorre la pared y entra a la que te llame.</p>
+          <span class="small">Ediciones numeradas · giclée sobre papel de algodón</span>
+        </div>
+      </div>
+      <div class="meter" aria-hidden="true"><span id="meter-n">01 / 05</span><span class="bar"><i id="meter-bar"></i></span><span id="meter-room">Sala I</span></div>
+    </div>
+  </section>
+</div>
+
+<main class="wrap">
+
+<!-- HOME -->
+<section id="v-inicio">
+  <div class="section" id="cuadernos">
+    <h2>Los cuadernos</h2>
+    <p class="intro">Cada cuaderno es una salida a terreno: un territorio, una estación, unas pocas fotografías. Se publica completo, tiene su propia sala en la galería y sus ediciones no se reimprimen.</p>
+    <div class="shelf" id="shelf"></div>
+  </div>
+
+  <div class="section" id="sonido">
+    <div class="sound">
+      <div>
+        <h2>Acerca tu teléfono al marco</h2>
+        <p style="color:var(--pencil)">En la esquina del marco va un chip NFC, y atrás un código QR de respaldo. No hay que instalar nada.</p>
+        <ul class="steps">
+          <li>El chip abre la página de tu obra, con tu número de ejemplar.</li>
+          <li>Suena la grabación hecha donde se tomó la fotografía.</li>
+          <li>Lees la nota de campo: qué pasaba ese día y a qué hora.</li>
+        </ul>
+        <button class="buy" id="simulate" type="button">Simular el NFC</button>
+      </div>
+      <div class="phone" id="phone" aria-hidden="true">
+        <div class="ph-img"></div><div class="pulse"></div>
+        <div class="ph-ui"><span class="ph-s">Cuaderno II · Ejemplar 7 de 25</span><span class="ph-title">El vuelo</span><span class="ph-s">▶ Escuchar el lugar</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="creed">
+      <div><h3>Pocas copias</h3><p>Cada fotografía se imprime en ediciones cortas y numeradas. Cuando se agota, no vuelve.</p></div>
+      <div><h3>El sonido es del lugar</h3><p>El audio de cada obra se grabó donde se tomó la fotografía, y siempre decimos cuándo y cómo.</p></div>
+      <div><h3>Cuidamos los lugares</h3><p>Nunca publicamos ubicaciones exactas. Solo la región, la altitud aproximada y la estación.</p></div>
+    </div>
+  </div>
+
+  <div class="section" id="preguntas">
+    <div class="faq">
+      <div><h2>Preguntas frecuentes</h2><p class="lead">Cómo encargar una obra, cuánto demora y qué llega a tu casa.</p></div>
+      <div>
+        <details><summary>¿Cómo hago un pedido?</summary><p>Entra a la obra que te guste, elige el tamaño y toca "Reservar este ejemplar". Completa tus datos y te enviamos un link de pago por correo. Tu número de ejemplar queda apartado por 48 horas mientras pagas.</p></details>
+        <details><summary>¿Cómo puedo pagar?</summary><p>Con tarjeta de débito o crédito a través de Webpay, o con Mercado Pago. Las cuotas dependen de las condiciones de cada medio de pago.</p></details>
+        <details><summary>¿Cuánto demora en llegar?</summary><p>Cada obra se imprime, enmarca y firma después de tu pago. La producción toma entre 10 y 15 días hábiles, y el despacho entre 2 y 5 días hábiles más, según tu región.</p></details>
+        <details><summary>¿Hacen envíos a todo Chile?</summary><p>Sí, a todo Chile continental, en embalaje rígido y con seguimiento. Para zonas extremas o envíos al extranjero, escríbenos antes de reservar.</p></details>
+        <details><summary>¿Qué significa que sea una edición limitada?</summary><p>Cada fotografía se imprime una cantidad fija de veces en cada tamaño. Cada copia lleva su número, la firma del fotógrafo y un certificado de autenticidad. Cuando una edición se agota, no se vuelve a imprimir.</p></details>
+        <details><summary>¿Cómo escucho el sonido de la obra?</summary><p>Acerca tu teléfono a la esquina del marco y se abre la página de tu obra con su grabación. Funciona con la mayoría de los iPhone recientes y con teléfonos Android que tengan NFC activado. Si tu teléfono no tiene NFC, escanea el código QR del reverso. No necesitas instalar ninguna aplicación.</p></details>
+        <details><summary>¿Puedo pedir otro tamaño o marco?</summary><p>Por ahora trabajamos con tres tamaños y un solo tipo de marco de madera. Si necesitas una medida especial para un espacio en particular, escríbenos y lo evaluamos.</p></details>
+        <details><summary>¿Qué pasa si la obra llega dañada?</summary><p>La reponemos sin costo. Avísanos dentro de los 7 días siguientes a la entrega, con fotos de la obra y del embalaje.</p></details>
+        <details><summary>¿Puedo regalarla?</summary><p>Sí. Al reservar puedes escribir una dedicatoria que imprimimos en el certificado, y el envío no incluye boleta ni precios a la vista.</p></details>
+        <details><summary>¿Cómo cuido la obra?</summary><p>Cuélgala lejos del sol directo y de la humedad. Las tintas pigmentadas de archivo y el papel de algodón están hechos para durar décadas en interiores.</p></details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NOTEBOOK -->
+<section id="v-cuaderno" hidden>
+  <div class="nb-nav" id="nb-nav"></div>
+</section>
+
+<!-- DETAIL -->
+<section id="v-obra" hidden>
+  <div class="crumbs" id="d-crumbs"></div>
+  <div class="detail">
+    <div>
+      <div class="slides" id="d-slides" tabindex="0" aria-label="Vistas de la obra">
+        <figure class="slide"><div class="print" id="d-frame"><div class="mat"><img id="d-img" alt=""></div></div></figure>
+        <figure class="slide dz" id="d-dz"><div class="zoom" id="d-zoom" role="img" aria-label="Detalle ampliado de la impresión"></div></figure>
+        <figure class="slide"><svg id="d-scale" viewBox="70 28 260 250" role="img" aria-label="La obra a escala sobre un sofá"></svg></figure>
+        <figure class="slide"><svg id="d-back" viewBox="0 0 400 290" role="img" aria-label="Reverso del marco con chip NFC, QR y certificado"></svg></figure>
+      </div>
+      <div class="slide-nav">
+        <div class="slide-tabs" id="d-tabs"><button type="button" data-i="0">La obra</button><button type="button" data-i="1">Detalle</button><button type="button" data-i="2">A escala</button><button type="button" data-i="3">Reverso</button></div>
+        <div class="arrows"><button type="button" id="d-prev" aria-label="Vista anterior">←</button><button type="button" id="d-next" aria-label="Vista siguiente">→</button></div>
+      </div>
+      <p class="slide-cap" id="d-cap"></p>
+    </div>
+    <div>
+      <span class="small" id="d-num"></span>
+      <h1 id="d-title"></h1>
+      <p class="note" id="d-note"></p>
+      <dl class="facts-table" id="d-log"></dl>
+      <fieldset class="sizes" id="d-sizes"></fieldset>
+      <div class="actions">
+        <a class="buy" href="#reserva">Reservar este ejemplar</a>
+        <a class="link" id="d-listen" href="#escuchar-03">Escuchar el lugar</a>
+      </div>
+      <p class="includes">Impresión giclée en papel de algodón con tintas de archivo · marco de madera hecho a mano y passe-partout libre de ácido · chip NFC y QR con el sonido del lugar · certificado firmado y numerado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKOUT -->
+<section id="v-reserva" hidden>
+  <div class="crumbs"><a id="c-back" href="#cuadernos">Volver a la obra</a></div>
+  <div class="checkout">
+    <div>
+      <h1>Reserva tu ejemplar</h1>
+      <p class="small" style="font-size:.92rem;margin:0 0 30px;max-width:34em">Apartamos tu número de ejemplar y te enviamos un link de pago por correo. La impresión parte cuando se confirma el pago.</p>
+      <form class="f" id="c-form" novalidate>
+        <div class="two">
+          <label for="c-name">Nombre<input id="c-name" autocomplete="name"></label>
+          <label for="c-mail">Correo<input id="c-mail" type="email" autocomplete="email"></label>
+        </div>
+        <div class="two">
+          <label for="c-phone">Teléfono<input id="c-phone" type="tel" autocomplete="tel" placeholder="+56 9"></label>
+          <label for="c-region">Región<select id="c-region"><option>Región Metropolitana</option><option>Valparaíso</option><option>Biobío</option><option>Ñuble</option><option>Maule</option><option>O'Higgins</option><option>La Araucanía</option><option>Los Ríos</option><option>Los Lagos</option><option>Coquimbo</option><option>Antofagasta</option><option>Otra región</option></select></label>
+        </div>
+        <label for="c-addr">Dirección de despacho<input id="c-addr" autocomplete="street-address"></label>
+        <label for="c-msg">Dedicatoria para el certificado, si es un regalo<textarea id="c-msg" rows="2"></textarea></label>
+        <p class="small" id="c-err" role="alert" hidden>Falta tu nombre o un correo válido para enviarte el link de pago.</p>
+        <div><button class="buy" type="submit">Reservar y recibir link de pago</button></div>
+      </form>
+    </div>
+    <aside class="receipt" aria-label="Resumen">
+      <span class="muted">Cuaderno de Campo · reserva</span>
+      <span class="t" id="s-title"></span>
+      <span class="muted" id="s-ed"></span>
+      <div class="ln"><span id="s-size"></span><span id="s-price"></span></div>
+      <div class="ln"><span>Despacho</span><span>Incluido</span></div>
+      <div class="ln tot"><span>Total</span><span id="s-total"></span></div>
+      <span class="muted">Producción de 10 a 15 días hábiles. Pago con Webpay o Mercado Pago.</span>
+    </aside>
+  </div>
+</section>
+
+<!-- THANKS -->
+<section id="v-gracias" hidden>
+  <div class="thanks">
+    <span class="small" id="t-code"></span>
+    <h1>Tu ejemplar quedó apartado.</h1>
+    <p id="t-text" style="color:var(--pencil)"></p>
+    <ol class="journey">
+      <li><b>Reserva recibida</b><span>Hoy. Te llega el link de pago a tu correo.</span></li>
+      <li><b>Impresión</b><span>Giclée en papel de algodón, revisada contra la prueba del fotógrafo.</span></li>
+      <li><b>Enmarcado y firma</b><span>Marco a mano, certificado firmado y chip programado con tu número.</span></li>
+      <li><b>Despacho</b><span>Embalaje rígido, con seguimiento hasta tu puerta.</span></li>
+    </ol>
+    <div class="actions"><a class="buy" id="t-listen" href="#escuchar-03">Escuchar tu obra ahora</a><a class="link" href="#cuadernos">Seguir mirando</a></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span class="brand" style="font-size:1.15rem">Cuaderno de Campo</span>
+  <span class="small">Fotografía de naturaleza en ediciones limitadas · Hecho en Chile</span>
+</div></footer>
+
+<!-- EXPERIENCE -->
+<div class="exp" id="exp" hidden role="dialog" aria-modal="true" aria-labelledby="e-title">
+  <div class="bg" id="e-bg"></div>
+  <div class="inner">
+    <div class="tophead"><span class="brand" style="font-size:1.15rem">Cuaderno de Campo</span><button class="close" id="e-close" type="button">Cerrar</button></div>
+    <div class="center">
+      <span class="ed" id="e-ed"></span>
+      <h1 id="e-title"></h1>
+      <button class="playbtn" id="e-play" type="button" aria-label="Escuchar el lugar"><svg viewBox="0 0 24 24" id="e-icon"><path d="M8 5v14l11-7z"/></svg></button>
+      <span class="hint">Escuchar el lugar. Mejor con audífonos.</span>
+      <canvas id="e-wave" width="1120" height="128" aria-hidden="true"></canvas>
+      <div class="timebar"><span id="e-cur">0:00</span><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="e-loop" checked> En loop</label><span id="e-dur">0:00</span></div>
+      <p class="story" id="e-story"></p>
+      <dl class="facts-table" id="e-log"></dl>
+    </div>
+    <p class="care">Sonido grabado en el lugar de la fotografía. No mostramos la ubicación exacta para proteger estos sitios. · Vista de prototipo: esto es lo que abre el chip del marco.</p>
+  </div>
+  <audio id="e-audio" preload="metadata"></audio>
+</div>
+
+<script>
+const BOOKS = [
+  {n:1, roman:"I", title:"Cielos bajos", place:"Andes del sur del Perú", season:"Otoño", cls:"c1", peek:"img/cuaderno-1.jpg",
+   intro:"Una semana de tormentas que casi nunca terminaron de caer. Cerros a más de tres mil metros, y la luz que se colaba por debajo de las nubes."},
+  {n:2, roman:"II", title:"Humedales del sur", place:"Centro-sur de Chile", season:"Invierno", cls:"c2", peek:"img/cuaderno-2.jpg",
+   intro:"Madrugadas y atardeceres de invierno entre pastizales y árboles sin hojas. Todas las obras de este cuaderno se grabaron con su sonido."},
+  {n:3, roman:"—", title:"Apuntes sueltos", place:"Fuera de serie", season:"Varias estaciones", cls:"c3", peek:"img/cuaderno-3.jpg",
+   intro:"Fotografías que no pertenecen a una salida en particular. Ediciones aún más cortas."},
+];
+const WORKS = [
+  {id:"01", book:1, title:"Antes de la lluvia", img:"img/01-antes-de-la-lluvia.jpg", shape:"tall", alt:"Cerros verdes con rocas rojizas bajo un cielo de tormenta",
+   region:"Andes del sur del Perú", alt_m:"sobre 3.300 m", season:"Otoño", hour:"16:40",
+   note:"El cielo bajó en veinte minutos. Abajo, el cerro seguía verde, como si no se hubiera enterado.", audio:null},
+  {id:"02", book:1, title:"Tres minutos de luz", img:"img/02-tres-minutos-de-luz.jpg", shape:"tall", alt:"Un cerro encendido de rojo al atardecer sobre una ciudad de ladrillo",
+   region:"Ciudad andina", alt_m:"sobre 3.300 m", season:"Otoño", hour:"18:05",
+   note:"No llovió. El sol encontró una rendija bajo la nube y encendió el cerro por tres minutos. Después, nada.", audio:null},
+  {id:"03", book:2, title:"El vuelo", img:"img/03-el-vuelo.jpg", shape:"wide", alt:"Silueta de un ave en vuelo sobre un horizonte morado al atardecer",
+   region:"Humedal del centro-sur", alt_m:"nivel del mar", season:"Invierno", hour:"19:52",
+   note:"Estuvo quieta en el pasto hasta que oscureció. El sonido es el segundo exacto en que levantó el vuelo.",
+   audio:"audio/03-el-vuelo.mp3", recorded:"Grabado en el lugar, en el mismo momento"},
+  {id:"04", book:2, title:"Bandada", img:"img/04-bandada.jpg", shape:"wide", alt:"Una bandada de pájaros pequeños posados en las ramas desnudas de un árbol",
+   region:"Valle del centro-sur", alt_m:"bajo 500 m", season:"Invierno", hour:"08:10",
+   note:"Llegaron todos juntos al mismo árbol, con el frío de la mañana. Hablaban más fuerte que el viento.",
+   audio:"audio/04-bandada.mp3", recorded:"Grabado en el lugar, la misma mañana"},
+  {id:"05", book:3, title:"Bajo el puente", img:"img/05-bajo-el-puente.jpg", shape:"tall", alt:"Hileras de pilares de hormigón bajo un puente, reflejados en el agua de un río",
+   region:"Ribera de un río", alt_m:"bajo 200 m", season:"Primavera", hour:"10:30",
+   note:"Abajo del puente el ruido de los autos se apaga y solo queda el río pasando entre los pilares.", audio:null},
+];
+const SIZES = [
+  {k:"S", name:"30 × 40 cm", ed:25, left:18, price:190000},
+  {k:"M", name:"50 × 70 cm", ed:15, left:11, price:340000},
+  {k:"L", name:"70 × 100 cm", ed:7, left:6, price:590000},
+];
+const clp = n => "$" + n.toLocaleString("es-CL");
+const $ = id => document.getElementById(id);
+const bookOf = w => BOOKS.find(b => b.n === w.book);
+let current = WORKS[0], size = SIZES[1];
+
+$("shelf").innerHTML = BOOKS.map(b => {
+  const count = WORKS.filter(w => w.book === b.n).length;
+  return `<a class="book" href="#cuaderno-${b.n}">
+    <div class="img"><img src="${b.peek}" alt="" loading="lazy"></div>
+    <div class="cap"><span class="roman">${b.roman}</span><div><h3>${b.title}</h3><span class="small">${b.place} · ${b.season.toLowerCase()} · ${count} ${count===1?"fotografía":"fotografías"}</span></div></div>
+  </a>`; }).join("");
+
+function facts(w){
+  return `<dt>Región</dt><dd>${w.region}</dd><dt>Altitud</dt><dd>${w.alt_m}</dd><dt>Estación</dt><dd>${w.season}</dd><dt>Hora</dt><dd>${w.hour}</dd>
+    <dt>Sonido</dt><dd>${w.audio ? w.recorded : "En grabación para esta edición"}</dd>`;
+}
+
+function showBook(b){
+  const prev = BOOKS.find(x => x.n === b.n - 1), next = BOOKS.find(x => x.n === b.n + 1);
+  $("nb-nav").innerHTML = (prev ? `<a href="#cuaderno-${prev.n}">← ${prev.title}</a>` : "<span></span>") + (next ? `<a href="#cuaderno-${next.n}">${next.title} →</a>` : "<span></span>");
+}
+
+function showDetail(w){
+  current = w; const b = bookOf(w);
+  $("d-crumbs").innerHTML = `<a href="#cuadernos">Cuadernos</a> / <a href="#cuaderno-${b.n}">${b.title}</a>`;
+  $("d-img").src = w.img; $("d-img").alt = w.alt;
+  $("d-frame").style.maxWidth = w.shape==="tall" ? "380px" : "100%";
+  $("d-zoom").style.backgroundImage = `url(${w.img})`; $("d-zoom").style.backgroundPosition = "50% 55%";
+  drawBack(); drawScale(); goSlide(0, false);
+  $("d-num").textContent = `Cuaderno ${b.roman} · ${b.title}`;
+  $("d-title").textContent = w.title; $("d-note").textContent = w.note; $("d-log").innerHTML = facts(w);
+  $("d-sizes").innerHTML = '<legend>Tamaño y edición</legend>' + SIZES.map(s => `
+    <label class="size"><input type="radio" name="size" id="size-${s.k}" value="${s.k}" ${s.k===size.k?'checked':''}>
+      <span><span class="nm">${s.name}</span><small>edición de ${s.ed}, quedan ${s.left}</small></span><span class="price">${clp(s.price)}</span></label>`).join("");
+  $("d-sizes").querySelectorAll("input").forEach(i => i.addEventListener("change", () => { size = SIZES.find(s => s.k === i.value); drawScale(); updateCap(); }));
+  $("d-listen").hidden = !w.audio; $("d-listen").href = "#escuchar-" + w.id;
+}
+// ===== detail carousel =====
+let slideI = 0;
+const CAPS = [
+  () => "Enmarcada con passe-partout, tal como llega a tu casa.",
+  () => "Detalle de la impresión giclée sobre papel de algodón. Mueve el cursor para recorrerla.",
+  () => `${size.name} sobre un sofá de 2 metros. Cambia el tamaño para comparar.`,
+  () => "Reverso: chip NFC en la esquina, QR de respaldo y certificado firmado.",
+];
+function updateCap(){ $("d-cap").textContent = CAPS[slideI](); }
+function goSlide(i, smooth = true){
+  slideI = (i + 4) % 4;
+  const s = $("d-slides"); s.scrollTo({left: slideI * s.clientWidth, behavior: smooth && !reduce ? "smooth" : "auto"});
+  $("d-tabs").querySelectorAll("button").forEach((b, k) => b.setAttribute("aria-current", k === slideI));
+  updateCap();
+}
+$("d-tabs").addEventListener("click", e => { const b = e.target.closest("button"); if(b) goSlide(+b.dataset.i); });
+$("d-prev").addEventListener("click", () => goSlide(slideI - 1));
+$("d-next").addEventListener("click", () => goSlide(slideI + 1));
+let slideT; $("d-slides").addEventListener("scroll", () => { clearTimeout(slideT); slideT = setTimeout(() => {
+  const s = $("d-slides"), i = Math.round(s.scrollLeft / s.clientWidth);
+  if(i !== slideI){ slideI = i; $("d-tabs").querySelectorAll("button").forEach((b, k) => b.setAttribute("aria-current", k === i)); updateCap(); } }, 80); }, {passive:true});
+$("d-slides").addEventListener("keydown", e => { if(e.key === "ArrowRight"){ e.preventDefault(); goSlide(slideI + 1); } if(e.key === "ArrowLeft"){ e.preventDefault(); goSlide(slideI - 1); } });
+$("d-dz").addEventListener("mousemove", e => { const r = e.currentTarget.getBoundingClientRect();
+  $("d-zoom").style.backgroundPosition = `${((e.clientX - r.left) / r.width * 100).toFixed(1)}% ${((e.clientY - r.top) / r.height * 100).toFixed(1)}%`; });
+
+function drawScale(){
+  const w = current, [a, b] = size.name.match(/\d+/g).map(Number);
+  const fw = w.shape === "tall" ? a : b, fh = w.shape === "tall" ? b : a;
+  const floor = 262, sofaTop = floor - 85, fx = 200 - fw/2, fb = sofaTop - 24, fy = fb - fh, m = Math.min(fw, fh) * 0.11;
+  const dim = (x1, y1, x2, y2, t, tx, ty, anchor = "middle") =>
+    `<line class="sv-p" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/><text class="sv-s" x="${tx}" y="${ty}" text-anchor="${anchor}">${t}</text>`;
+  $("d-scale").innerHTML = `
+    <line class="sv-l" x1="0" y1="${floor}" x2="400" y2="${floor}"/>
+    <path class="sv-l" d="M104 ${floor-6} V${sofaTop+8} q0 -8 8 -8 H288 q8 0 8 8 V${floor-6}"/>
+    <path class="sv-l" d="M96 ${floor-6} V${sofaTop+30} q0 -7 7 -7 h12 q7 0 7 7 V${floor-6} M278 ${floor-6} V${sofaTop+30} q0 -7 7 -7 h12 q7 0 7 7 V${floor-6}"/>
+    <path class="sv-l" d="M122 ${sofaTop+42} H278 M96 ${floor-6} H304 M104 ${floor-6} v6 M296 ${floor-6} v6"/>
+    <rect class="sv-f" x="${fx}" y="${fy}" width="${fw}" height="${fh}"/>
+    <image href="${w.img}" x="${fx+m}" y="${fy+m}" width="${fw-2*m}" height="${fh-2*m}" preserveAspectRatio="xMidYMid slice"/>
+    ${dim(fx, fy-9, fx+fw, fy-9, fw + " cm", 200, fy-13)}
+    <line class="sv-p" x1="${fx}" y1="${fy-12}" x2="${fx}" y2="${fy-6}"/><line class="sv-p" x1="${fx+fw}" y1="${fy-12}" x2="${fx+fw}" y2="${fy-6}"/>
+    ${dim(fx+fw+9, fy, fx+fw+9, fb, fh + " cm", fx+fw+14, fy+fh/2+3, "start")}
+    ${dim(96, floor+8, 304, floor+8, "sofá 200 cm", 200, floor+11+8)}
+    <line class="sv-p" x1="96" y1="${floor+5}" x2="96" y2="${floor+11}"/><line class="sv-p" x1="304" y1="${floor+5}" x2="304" y2="${floor+11}"/>`;
+}
+function drawBack(){
+  let qr = ""; const seed = [...current.id].reduce((s, c) => s*31 + c.charCodeAt(0), 7);
+  for(let r = 0; r < 9; r++) for(let c = 0; c < 9; c++){
+    const corner = (r < 3 && c < 3) || (r < 3 && c > 5) || (r > 5 && c < 3);
+    const on = corner ? !(r % 2 === 1 && (c === 1 || c === 7)) && !((r === 1 || r === 7) && c % 3 === 1) : ((seed * (r+3) * (c+5)) % 7) < 3;
+    if(on) qr += `<rect class="sv-d" x="${132 + c*3.6}" y="${212 + r*3.6}" width="3.6" height="3.6"/>`;
+  }
+  $("d-back").innerHTML = `
+    <rect class="sv-k" x="120" y="30" width="160" height="230"/>
+    <rect class="sv-p" x="130" y="40" width="140" height="210"/>
+    <path class="sv-l" d="M140 86 Q200 66 260 86"/><circle class="sv-l" cx="140" cy="86" r="2.5"/><circle class="sv-l" cx="260" cy="86" r="2.5"/>
+    <rect class="sv-f" x="168" y="126" width="64" height="44"/><path class="sv-p" d="M168 126 L200 150 L232 126"/>
+    <text class="sv-s" x="200" y="164" text-anchor="middle">nº 7 / 25</text>
+    ${qr}
+    <circle class="sv-l" cx="252" cy="230" r="9"/><path class="sv-p" d="M248 226 a6 6 0 0 1 0 8 M252 223 a10 10 0 0 1 0 14"/>
+    <path class="sv-p" d="M60 76 H138"/><text class="sv-t" x="56" y="79" text-anchor="end">alambre</text>
+    <path class="sv-p" d="M234 148 H330"/><text class="sv-t" x="334" y="145">certificado firmado</text><text class="sv-s" x="334" y="157">con número de ejemplar</text>
+    <path class="sv-p" d="M130 228 H70"/><text class="sv-t" x="66" y="225" text-anchor="end">QR de respaldo</text><text class="sv-s" x="66" y="237" text-anchor="end">para teléfonos sin NFC</text>
+    <path class="sv-p" d="M262 230 H330"/><text class="sv-t" x="334" y="227">chip NFC</text><text class="sv-s" x="334" y="239">abre el sonido del lugar</text>
+    <text class="sv-s" x="200" y="282" text-anchor="middle">reverso del marco · vista esquemática</text>`;
+}
+
+function showCheckout(){
+  const w = current, s = size, n = s.ed - s.left + 1;
+  $("c-back").href = "#obra-" + w.id; $("c-back").textContent = "Volver a " + w.title;
+  $("s-title").textContent = w.title; $("s-ed").textContent = `Ejemplar ${n} de ${s.ed}`;
+  $("s-size").textContent = s.name; $("s-price").textContent = clp(s.price); $("s-total").textContent = clp(s.price);
+}
+$("c-form").addEventListener("submit", e => {
+  e.preventDefault();
+  const ok = $("c-name").value.trim() && /\S+@\S+\.\S+/.test($("c-mail").value);
+  $("c-err").hidden = !!ok; if(!ok) return;
+  const n = size.ed - size.left + 1;
+  $("t-code").textContent = `Reserva CDC-${current.id}-${String(n).padStart(2,"0")}`;
+  $("t-text").textContent = `${current.title}, ${size.name}, ejemplar ${n} de ${size.ed}. Te escribimos a ${$("c-mail").value} con el link de pago. (Prototipo: no se envía ningún correo.)`;
+  $("t-listen").href = "#escuchar-" + (current.audio ? current : WORKS.find(w => w.audio)).id;
+  location.hash = "gracias";
+});
+
+// experience
+const audio = $("e-audio"); let ctx, analyser, data, raf;
+function openExp(w){
+  const b = bookOf(w);
+  $("e-bg").style.backgroundImage = `url(${w.img})`;
+  $("e-ed").textContent = `Cuaderno ${b.roman} · ${b.title} · Ejemplar 7 de 25`;
+  $("e-title").textContent = w.title; $("e-story").textContent = w.note; $("e-log").innerHTML = facts(w);
+  audio.src = w.audio; audio.loop = $("e-loop").checked;
+  $("exp").hidden = false; $("exp").classList.remove("playing"); setIcon(false); drawIdle();
+  document.body.style.overflow = "hidden";
+}
+function closeExp(){ audio.pause(); $("exp").hidden = true; document.body.style.overflow = ""; cancelAnimationFrame(raf); }
+function setIcon(p){ $("e-icon").innerHTML = p ? '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>' : '<path d="M8 5v14l11-7z"/>'; $("e-play").setAttribute("aria-label", p ? "Pausar" : "Escuchar el lugar"); }
+$("e-play").addEventListener("click", async () => {
+  try{
+    if(!ctx){ ctx = new (window.AudioContext||window.webkitAudioContext)(); const src = ctx.createMediaElementSource(audio);
+      analyser = ctx.createAnalyser(); analyser.fftSize = 512; src.connect(analyser); analyser.connect(ctx.destination); data = new Uint8Array(analyser.fftSize); }
+    if(ctx.state === "suspended") await ctx.resume();
+  }catch(_){}
+  if(audio.paused){ try{ await audio.play(); }catch(_){} } else audio.pause();
+});
+audio.addEventListener("play", () => { setIcon(true); $("exp").classList.add("playing"); loop(); });
+audio.addEventListener("pause", () => { setIcon(false); $("exp").classList.remove("playing"); });
+audio.addEventListener("loadedmetadata", () => $("e-dur").textContent = fmt(audio.duration));
+audio.addEventListener("timeupdate", () => $("e-cur").textContent = fmt(audio.currentTime));
+$("e-loop").addEventListener("change", e => audio.loop = e.target.checked);
+$("e-close").addEventListener("click", () => location.hash = expReturn || "inicio");
+const fmt = t => isFinite(t) ? `${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,"0")}` : "0:00";
+function drawIdle(){ const c=$("e-wave"),g=c.getContext("2d"); g.clearRect(0,0,c.width,c.height); g.strokeStyle="rgba(232,235,230,.35)"; g.lineWidth=2; g.beginPath(); g.moveTo(0,c.height/2); g.lineTo(c.width,c.height/2); g.stroke(); }
+function loop(){
+  const c=$("e-wave"),g=c.getContext("2d"),W=c.width,H=c.height;
+  if(!analyser){ drawIdle(); return; }
+  analyser.getByteTimeDomainData(data);
+  g.clearRect(0,0,W,H); g.strokeStyle="rgba(232,235,230,.85)"; g.lineWidth=2; g.beginPath();
+  for(let i=0;i<data.length;i++){ const x=i/(data.length-1)*W, y=H/2+((data[i]-128)/128)*H*1.6; i?g.lineTo(x,y):g.moveTo(x,y); }
+  g.stroke();
+  if(!audio.paused) raf = requestAnimationFrame(loop); else drawIdle();
+}
+$("simulate").addEventListener("click", () => {
+  const p = $("phone"); p.classList.remove("tap"); void p.offsetWidth; p.classList.add("tap");
+  setTimeout(() => location.hash = "escuchar-03", matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 1100);
+});
+
+// ===== gallery walk: every cuaderno is a room =====
+const track = $("track"), walk = $("walk");
+const TINT = {1:"var(--cover-1)", 2:"var(--cover-2)", 3:"var(--cover-3)"};
+let walkMode = null;
+function roomPanel(b, mode){
+  const count = WORKS.filter(w => w.book === b.n).length;
+  return `<div class="room" data-room="${b.n}">
+    ${mode === "book" ? '<a class="small" href="#cuadernos">← Todos los cuadernos</a>' : ''}
+    <span class="roman">${b.roman}</span>
+    <h3>${b.title}</h3>
+    <span class="small">${b.place} · ${b.season.toLowerCase()} · ${count} ${count === 1 ? "fotografía" : "fotografías"}</span>
+    <p>${b.intro}</p>
+    ${mode === "home" ? `<a class="link arrow" href="#cuaderno-${b.n}">Entrar a esta sala</a>` : ''}
+  </div>`;
+}
+function piece(w, mode){
+  const b = bookOf(w), long = mode === "book";
+  return `<a class="piece ${w.shape}" href="#obra-${w.id}" data-cursor="Ver" data-room="${b.n}">
+    <div class="print"><div class="mat"><img src="${w.img}" alt="${w.alt}"></div></div>
+    <div class="wall-label ${long ? "long" : ""}"><b>${w.title}</b>
+      ${long ? `<span class="nt">${w.note}</span>` : ""}
+      <span class="mute">${w.region}, ${w.season.toLowerCase()}${long ? `<br>${w.alt_m} · ${w.hour}` : ""}</span><br>
+      <span class="mute">Ediciones de 7 a 25 · desde ${clp(SIZES[0].price)}</span>
+      ${w.audio ? '<br><span class="snd">Con el sonido del lugar</span>' : ''}
+      ${long ? '<br><span class="go">Ver la obra y tamaños</span>' : ''}</div>
+  </a>`;
+}
+function renderWalk(mode, book){
+  const key = mode + (book ? book.n : "");
+  if(walkMode === key) return; walkMode = key;
+  const books = mode === "home" ? BOOKS : [book];
+  let html = mode === "home" ? `<div class="intro"><h2>La galería</h2><p>Cada cuaderno es una sala. Recorre la pared: todo lo que cuelga aquí se puede encargar mientras queden ejemplares.</p></div>` : "";
+  books.forEach(b => { html += roomPanel(b, mode) + WORKS.filter(w => w.book === b.n).map(w => piece(w, mode)).join(""); });
+  if(mode === "book"){
+    const next = BOOKS.find(x => x.n === book.n + 1) || BOOKS[0];
+    html += `<div class="room end"><span class="small">Siguiente sala</span><h3>${next.title}</h3><a class="link arrow" href="#cuaderno-${next.n}">Pasar a la sala ${next.roman}</a></div>`;
+  }
+  track.innerHTML = html; track.scrollLeft = 0;
+  track.querySelectorAll("img").forEach(i => i.addEventListener("load", sizeWalk));
+  setRoom(books[0].n);
+}
+function setRoom(n){
+  if(walk.dataset.room == n) return;
+  walk.dataset.room = n; walk.style.setProperty("--tint", TINT[n]);
+  const b = BOOKS.find(x => x.n === n); $("meter-room").textContent = `Sala ${b.roman} · ${b.title}`;
+}
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let native = false;
+function sizeWalk(){
+  native = reduce || innerWidth < 760;
+  walk.classList.toggle("native", native);
+  if(native){ walk.style.height = ""; track.style.transform = ""; return; }
+  walk.style.height = (track.scrollWidth - innerWidth + innerHeight) + "px";
+  onScroll();
+}
+function onScroll(){
+  if($("home-full").hidden) return;
+  const y = scrollY;
+  if(!reduce && !$("film").hidden){
+    $("film-v").style.transform = `translate3d(0,${y*0.35}px,0)`;
+    const h = $("film-h"); h.style.transform = `translate3d(0,${y*-0.15}px,0)`; h.style.opacity = Math.max(0, 1 - y/520);
+  }
+  const pieces = track.querySelectorAll(".piece");
+  let p;
+  if(native){ p = track.scrollLeft / Math.max(1, track.scrollWidth - track.clientWidth); }
+  else {
+    const r = walk.getBoundingClientRect(), span = walk.offsetHeight - innerHeight;
+    p = Math.min(Math.max(-r.top / span, 0), 1);
+    track.style.transform = `translate3d(${-p * (track.scrollWidth - innerWidth)}px,0,0)`;
+  }
+  $("meter-bar").style.width = (p*100) + "%";
+  // which piece/room is nearest the centre of the screen
+  let best = null, bd = 1e9; const mid = innerWidth / 2;
+  track.querySelectorAll("[data-room]").forEach(el => { const r = el.getBoundingClientRect(), d = Math.abs(r.left + r.width/2 - mid); if(d < bd){ bd = d; best = el; } });
+  if(best) setRoom(+best.dataset.room);
+  const idx = best && best.classList.contains("piece") ? [...pieces].indexOf(best) + 1 : Math.min(pieces.length, Math.round(p*(pieces.length-1))+1);
+  $("meter-n").textContent = String(Math.max(1, idx)).padStart(2,"0") + " / " + String(pieces.length).padStart(2,"0");
+}
+addEventListener("scroll", onScroll, {passive:true});
+track.addEventListener("scroll", onScroll, {passive:true});
+addEventListener("resize", sizeWalk);
+addEventListener("load", sizeWalk);
+
+// film sound
+$("film-sound").addEventListener("click", () => {
+  const v = $("film-v"), on = v.muted;
+  v.muted = !on; if(on) v.play().catch(()=>{});
+  $("film-sound").classList.toggle("on", on); $("film-sound").setAttribute("aria-pressed", on);
+  $("film-sound-t").textContent = on ? "Silenciar" : "Escuchar el humedal";
+  $("snd-wave").setAttribute("opacity", on ? "1" : ".35");
+});
+
+// custom cursor (mouse only)
+if(matchMedia("(pointer: fine)").matches && !reduce){
+  const c = document.createElement("div"); c.className = "cursor"; c.innerHTML = "<span>Ver</span>"; c.hidden = true; document.body.appendChild(c);
+  let x=0,y=0,cx=0,cy=0;
+  addEventListener("mousemove", e => { x = e.clientX; y = e.clientY; c.hidden = !$("home-full").contains(e.target) || !$("exp").hidden;
+    const t = e.target.closest("[data-cursor]"); c.classList.toggle("big", !!t); c.classList.toggle("light", !!e.target.closest(".film")); });
+  (function tick(){ cx += (x-cx)*.2; cy += (y-cy)*.2; c.style.transform = `translate3d(${cx}px,${cy}px,0)`; requestAnimationFrame(tick); })();
+}
+
+// router
+let expReturn = "inicio", lastPage = "inicio";
+function route(){
+  const h = (location.hash || "#inicio").slice(1); let m;
+  if((m = h.match(/^escuchar-(\d\d)$/))){ const w = WORKS.find(x => x.id === m[1] && x.audio); if(w){ expReturn = lastPage; openExp(w); return; } }
+  if(!$("exp").hidden) closeExp();
+  let v = "inicio", anchor = null;
+  let book = null;
+  if((m = h.match(/^cuaderno-(\d)$/))){ book = BOOKS.find(x => x.n === +m[1]); if(book){ v = "cuaderno"; showBook(book); } }
+  else if((m = h.match(/^obra-(\d\d)$/))){ const w = WORKS.find(x => x.id === m[1]); if(w){ v = "obra"; showDetail(w); } }
+  else if(h === "reserva"){ v = "reserva"; showCheckout(); }
+  else if(h === "gracias"){ v = "gracias"; }
+  else if(h === "cuadernos" || h === "sonido" || h === "preguntas"){ anchor = h; }
+  ["inicio","cuaderno","obra","reserva","gracias"].forEach(x => $("v-"+x).hidden = x !== v);
+  const showWalk = v === "inicio" || v === "cuaderno";
+  $("home-full").hidden = !showWalk;
+  $("film").hidden = v !== "inicio";
+  document.body.classList.toggle("home", v === "inicio");
+  if(showWalk){ renderWalk(v === "inicio" ? "home" : "book", book); sizeWalk(); }
+  if(v === "inicio") $("film-v").play().catch(()=>{}); else $("film-v").pause();
+  lastPage = h;
+  if(anchor) requestAnimationFrame(() => $(anchor).scrollIntoView({behavior:"smooth"})); else window.scrollTo(0,0);
+}
+window.addEventListener("hashchange", route); route();
+document.addEventListener("keydown", e => { if(e.key === "Escape" && !$("exp").hidden) location.hash = expReturn; });
+</script>
+
+</body>
+</html>
